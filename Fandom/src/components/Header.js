@@ -22,7 +22,7 @@ class Header extends Component{
       <p class="content" style={q}>Character</p>
       <input type="text" placeholder="Episode or Character or Location"/>
       <p class="content" style={p} >
-      <img src={search} /></p>
+      <img src={search} alt="search"/></p>
       </p>
       </div>
     );
