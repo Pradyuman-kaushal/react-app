@@ -1,6 +1,5 @@
 import React,{Component} from 'react';
 import {BrowserRouter as Router,Link} from 'react-router-dom';
-import Route from 'react-router-dom/Route';
 import './Content.css';
 import Desc from './Desc';
 class Content extends Component{
@@ -38,9 +37,6 @@ class Content extends Component{
         </td>
       </tr>
       </table>
-        <Route path="/Location" exact render={()=>{return (<h1>Location</h1>);}}/>
-        <Route path="/Character" exact render={()=>{return(<h1>Characters</h1>);}}/>
-        <Route path="/Episode" exact render={()=>{return(<h1>Episodes</h1>);}}/>
         </div>
 
       </Router>
