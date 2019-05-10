@@ -1,8 +1,8 @@
 import React,{Component} from 'react';
 import {BrowserRouter as Router,Link} from 'react-router-dom';
 import Route from 'react-router-dom/Route';
-import Locationdesc from './Locationdesc';
-class Location extends Component{
+import Episodedesc from './Episodedesc';
+class Episode extends Component{
   state={
     items:[],
     flag:false
@@ -15,53 +15,53 @@ display(){
     const style=this.state.flag?{display:'none'}:{fontFamily:'times new roman',cursor:'pointer'}
     return this.state.items.map(i=>{
       return <Router><div className="loc" style={style} onClick={this.handleChange}>
-              <Link to={'/location'+i.id}><div className="id" align="center" >
-                  {i.type}
+                  <Link to={"/episode"+i.id}><div className="id" align="center" >
+                  {i.episode}
               </div>
               <div className="name" align="center">
                   {i.name}
               </div>
               <div className="residents" align="center">
-                  {this.dis(i.residents.length)}
+                  {i.air_date}
               </div>
               </Link>
               </div>
+              <Route path= {'/episode'+i.id} exact render={()=>{return(<Episodedesc item={this.state.items} id={i.id}/>);}}/>
+              </Router>
 
-
-<Route exact path= {'/location'+i.id} render={()=>{return(<Locationdesc item={this.state.items} id={i.id}/>);}}/>
-</Router>
 
 
 
     })
 
   }
-  handleChange(event){
-this.setState({flag:true});
-  }
-  dis(a){
-  if(a<=1)
-  return a+" Resident";
-  else
-  return a+" Residents";
-}
-render(){
-const s=this.state.flag?{display:'none'}:{};
+  funi(i){
 return(
+    <Episodedesc item={this.state.item} id={i}/>
+)
+  }
+  handleChange(event){
+  this.setState({flag:true});
+  }
+render(){
 
-<div>
-  <div style={s}><h1><i>Locations</i></h1><hr/></div>
-<div id="main">
-  {this.display()}
+  const s=this.state.flag?{display:'none'}:{};
+  return(
+
+  <div>
+    <div style={s}><h1><i>Episodes</i></h1><hr/></div>
+  <div id="main">
+    {this.display()}
+    </div>
   </div>
-</div>
+
 );
 }
 async componentDidMount(){
-  const res=await fetch("https://rickandmortyapi.com/api/location/");
+  const res=await fetch("https://rickandmortyapi.com/api/episode/");
   const data=await res.json();
   console.log(data);
   this.setState({items:data.results});
 }
 }
-export default Location;
+export default Episode;

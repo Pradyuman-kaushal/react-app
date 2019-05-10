@@ -3,7 +3,7 @@
                width:23%;
                border:1px solid silver;
                box-shadow: 1px 1px 1px 0px silver;
-               margin: 10px;
+               margin: 0.8%;
                position:relative;
 
            }
@@ -11,12 +11,18 @@
                height:10%;
                padding-top:3%;
                padding-bottom: 5%;
+               font-size: 17px;
            }
            .name{
                height:40%;
                background-color:#F1F1F1;
                padding-top: 26%;
                padding-bottom:25%;
+               font-size: 18px;
+
+           }
+           .residents{
+             color:grey;
            }
 #description{
 
