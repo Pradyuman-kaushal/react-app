@@ -2,6 +2,7 @@ import React,{Component} from 'react';
 import {BrowserRouter as Router,Link} from 'react-router-dom';
 import Route from 'react-router-dom/Route';
 import Characterlink from './Characterlink';
+import loading from './loading.gif';
 class Episodelink extends Component{
 constructor(){
   super();
@@ -9,8 +10,12 @@ constructor(){
 }
 state={
   res:[],
+  loading:true
 };
   fun(){
+    if(this.state.loading){
+      return <img src={loading} style={{paddingLeft:'50%'}}/>
+    }else{
     const style=this.state.flag?{width:'105%',height:'100%'}:{display:'none'};
     const pstyle=this.state.pf?{display:'none'}:{fontSize:'20px',padding:'20px'};
     const p1style=this.state.pf?{display:'none'}:{fontSize:'20px'};
@@ -34,6 +39,7 @@ state={
     </ol>
       </div>
   }
+}
   drname(p){
           return <li><a href={p}>{console.log(this.state.res)}</a></li>
       }
@@ -50,15 +56,15 @@ async componentDidMount(){
   const data=await res.json();
   arr[i]=data;
 }
-  this.setState({res:arr,flag:true});
+  this.setState({res:arr,flag:true,loading:false});
 }
 render(){
-return(
-  <div>
-{this.fun()}
-</div>
-);
-}
+  return(
+    <div>
+    {this.fun()}
+    </div>
+    );
+  }
 
 }
 export default Episodelink;

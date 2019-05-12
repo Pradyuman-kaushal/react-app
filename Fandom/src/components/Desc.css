@@ -7,6 +7,12 @@
                position:relative;
 
            }
+           .loc a{
+             text-decoration: none;
+             alink:black;
+             vlink:black;
+             color:black;
+           }
            .id,.residents{
                height:10%;
                padding-top:3%;

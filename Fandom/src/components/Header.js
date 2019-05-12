@@ -3,11 +3,13 @@ import logo from './logo.png';
 import search from './search.png'
 import './Header.css';
 import Characterlink from './Characterlink';
+import Content from './Content';
 const p={
   float:'right'
 };
 const q={
-  margin:'15px'
+  margin:'0%',
+  paddingTop:'5%'
 };
 
 class Header extends Component{
@@ -37,21 +39,29 @@ funi(){
       <div id="top">
 
       <img src={logo} alt="logo" id="logo"/>
-      <p id="search">
+      <div id="search">
       <p class="content" style={q}>Character</p>
-      <input type="text" placeholder="Enter Any Character" id="ch"/>
+      <input type="text" placeholder="Enter Any Character(case sensitive)" id="ch"/>
       <p class="content" style={p} >
-      <img src={search} alt="search" onClick={this.func}/>
+      <img src={search} alt="search" onClick={(e)=>this.props.updates(true,document.getElementById("ch").value)}/>
       </p>
-      </p>
+      </div>
       </div>
     );
   }
   func(){
     var x=document.getElementById("ch").value;
-    this.setState({ch:x});
+    var content = new Content;
+
+
+    if(x.length==0)
+    content.searchbar("",this.state.items);
+    else{
+    content.searchbar(x,this.state.items);
   }
+      }
   getcha(){
+    console.log()
     return this.state.ch;
   }
   async componentDidMount(){

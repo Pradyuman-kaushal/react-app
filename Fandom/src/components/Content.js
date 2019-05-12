@@ -1,11 +1,16 @@
 import React,{Component} from 'react';
 import {BrowserRouter as Router,Link} from 'react-router-dom';
-
+import Route from 'react-router-dom/Route';
+import Header from './Header';
 import './Content.css';
 import Desc from './Desc';
+import Characterlink from './Characterlink';
 class Content extends Component{
+
   state={
-    id:0
+items:[],
+    id:0,
+
   };
 
   constructor(){
@@ -16,7 +21,7 @@ class Content extends Component{
   }
 
 
-  render(){
+    render(){
     return(
       <Router>
       <div id="q">
@@ -24,37 +29,68 @@ class Content extends Component{
       <tr>
         <td id="side" valign="top">
           <table align="center">
-            <tr><td align="center"><Link onClick={this.loc}>Locations</Link></td></tr>
-            <tr><td align="center"><Link onClick={this.char}>Characters</Link></td></tr>
-            <tr><td align="center"><Link onClick={this.epi}>Episodes</Link></td></tr>
+            <tr style={{paddingTop:'10%'}}><td align="center"><Link to={"/lc"} onClick={this.loc} >Locations</Link></td></tr>
+            <tr style={{paddingTop:'2%'}}><td align="center"><Link to={"/ch"} onClick={this.char} >Characters</Link></td></tr>
+            <tr style={{paddingTop:'2%'}}><td align="center"><Link to={"/ep"} onClick={this.epi} >Episodes</Link></td></tr>
           </table>
         </td>
         <td valign="top">
           <div id="refs">
-            <Desc
-              id={this.state.id}
-            />
+
+          {this.searchbar()}
+
           </div>
         </td>
       </tr>
       </table>
         </div>
-
+        <Route exact path="/lc"/>
+        <Route exact path="/ch"/>
+        <Route exact path="/ep"/>
       </Router>
     );
-  }
 
-  loc(){
+}
+loc(){
 
-    this.setState({id:1});
+  this.setState({id:1});
 
-  }
+}
 
-  char(){
-    this.setState({id:2});
+char(){
+  this.setState({id:2});
+}
+epi(){
+  this.setState({id:3});
+}
+sbar(){
+  var header=new Header;
+  return header.func();
+}
+searchbar(){
+  if(this.props.chars.length==0){
+    console.log("x1")
+    return <Desc
+      id={this.state.id}
+    />
   }
-  epi(){
-    this.setState({id:3});
+  else{
+
+    for(var i=0;i<this.state.items.length;i++){
+
+      if(this.props.chars===this.state.items[i].name)
+    {console.log(this.state.items.length);
+      return <Characterlink item={this.state.items[i]}/>;
+    }
   }
+  return <h1>Not Found</h1>
+}
+}
+async componentDidMount(){
+  const res=await fetch("https://rickandmortyapi.com/api/character/");
+  const data=await res.json();
+  console.log(data);
+  this.setState({items:data.results});
+}
 }
 export default Content;
