@@ -7,20 +7,26 @@ import Desc from './Desc';
 import Characterlink from './Characterlink';
 class Content extends Component{
 
-  state={
-items:[],
-    id:0,
 
-  };
 
   constructor(){
     super();
     this.loc=this.loc.bind(this);
     this.char=this.char.bind(this);
     this.epi=this.epi.bind(this);
-  }
+    this.state={
+      items:[],
+      id:0,
+      show:false
+    };
+    }
 
-
+  handleChange(e){
+      var {value} = e.target;
+      this.setState({
+        id: value
+      },() => this.props.changeValue(value));
+    }
     render(){
     return(
       <Router>
@@ -51,17 +57,18 @@ items:[],
     );
 
 }
+p(){
+  }
 loc(){
-
-  this.setState({id:1});
-
+  this.setState({id:1,show:true});
 }
 
 char(){
-  this.setState({id:2});
+  this.setState({id:2,show:true});
 }
 epi(){
-  this.setState({id:3});
+  this.setState({id:3,show:true});
+
 }
 sbar(){
   var header=new Header;
@@ -69,18 +76,21 @@ sbar(){
 }
 searchbar(){
   if(this.props.chars.length==0){
-    console.log("x1")
-    return <Desc
+      return <Desc
       id={this.state.id}
     />
+
   }
   else{
-
-    for(var i=0;i<this.state.items.length;i++){
+    const divs=this.state.show?{}:{display:'none'};
+    const divv=this.state.show?{display:'none'}:{};
+      for(var i=0;i<this.state.items.length;i++){
 
       if(this.props.chars===this.state.items[i].name)
-    {console.log(this.state.items.length);
-      return <Characterlink item={this.state.items[i]}/>;
+    { console.log(this.state.id);
+
+      return <Characterlink item={this.state.items[i]}/>
+    
     }
   }
   return <h1>Not Found</h1>

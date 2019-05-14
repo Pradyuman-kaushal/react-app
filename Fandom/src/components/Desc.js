@@ -3,6 +3,7 @@ import './Desc.css';
 import Location from './Location';
 import Character from './Character';
 import Episode from './Episode';
+import Characterlink from './Characterlink';
 class Desc extends Component{
   state={
     id:0,
@@ -21,6 +22,7 @@ display(a){
         </div>
       )
   }
+
   else if(a===1){
     return(
     <div>
@@ -39,6 +41,10 @@ display(a){
       <Episode />
       </div>
     )}
+  else if(a===4){
+      return <div><Characterlink item={this.props.item} /></div>
+    }
+
   }
 render(){
   return(

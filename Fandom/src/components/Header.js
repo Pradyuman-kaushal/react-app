@@ -16,6 +16,8 @@ class Header extends Component{
 constructor(){
   super();
   this.func=this.func.bind(this);
+  this.change=this.change.bind(this);
+  this.alter=this.alter.bind(this);
   this.state={
     items:[],
     ch:""
@@ -28,9 +30,12 @@ funi(){
     if(this.state.items[i].name.equals(this.ref.name.value)){
 
       return <Characterlink item={this.state.items[i]}/>*/
-
-
-
+}
+alter(){
+  this.setState({});
+}
+change(){
+  document.getElementById("ch").value='';
 }
   render(){
 
@@ -41,9 +46,9 @@ funi(){
       <img src={logo} alt="logo" id="logo"/>
       <div id="search">
       <p class="content" style={q}>Character</p>
-      <input type="text" placeholder="Enter Any Character(case sensitive)" id="ch"/>
+      <input type="text" placeholder="Enter Any Character(case sensitive)" onChange={this.alter} id="ch" />
       <p class="content" style={p} >
-      <img src={search} alt="search" onClick={(e)=>this.props.updates(true,document.getElementById("ch").value)}/>
+      <img src={search} alt="search" onClick={this.change} onMouseDown={(e)=>this.props.updates(true,document.getElementById("ch").value,0)}/>
       </p>
       </div>
       </div>
